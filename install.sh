@@ -220,7 +220,9 @@ git config --global user.name "Léo Carvalho"
 git config --global user.email "carvalho.csleo@gmail.com"
 chsh -s /bin/zsh
 rm -f /home/leonardo/.zshrc
+rm -f /home/leonardo/.gitconfig
 ln /home/leonardo/dev/dotfiles/.zshrc /home/leonardo/.zshrc
+ln /home/leonardo/dev/dotfiles/.gitconfig /home/leonardo/.gitconfig
 source /home/leonardo/.zshrc
 
 ## Update system and clean ##
