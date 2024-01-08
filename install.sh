@@ -217,6 +217,9 @@ sudo usermod -aG docker $USER
 git config --global user.name "Léo Carvalho"
 git config --global user.email "carvalho.csleo@gmail.com"
 chsh -s /bin/zsh
+rm -f /home/leonardo/.zshrc
+ln /home/leonardo/dev/dotfiles/.zshrc /home/leonardo/.zshrc
+source /home/leonardo/.zshrc
 
 ## Update system and clean ##
 sudo apt update -q && sudo apt upgrade -y -q

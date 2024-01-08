@@ -1,5 +1,7 @@
 # If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:/usr/local/android-studio/bin:/usr/local/android-studio/jbr/bin:$PATH
+export JAVA_HOME=/usr/local/android-studio/jbr
+export ANDROID_HOME=~/Android/Sdk
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -8,7 +10,11 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="robbyrussell"
+#ZSH_THEME="robbyrussell"
+#ZSH_THEME="dieter"
+#ZSH_THEME="maran"
+ZSH_THEME="frisk"
+
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -100,9 +106,27 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+plugins=(
+    bgnotify
+    docker
+    docker-compose
+    git
+    sudo
+    dotenv
+    npm
+    safe-paste
+    snap
+    themes
+    zsh-autosuggestions
+)
+
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 alias vpnstart="openvpn3 session-start --config ~/.ssh/leo.ovpn"
 alias vpnstop="openvpn3 session-manage --config ~/.ssh/leo.ovpn --disconnect"
+alias cp='cp -i'
+alias df='df -h'
+alias free='free -m -h'
+
