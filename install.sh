@@ -8,13 +8,19 @@ EDGE_KEY="https://packages.microsoft.com/keys/microsoft.asc"
 EDGE_REPOSITORY="deb [arch=amd64] https://packages.microsoft.com/repos/edge stable main"
 SURFSHARK_URL="https://downloads.surfshark.com/linux/debian-install.sh"
 JETBRAINS_MONO_URL="https://download.jetbrains.com/fonts/JetBrainsMono-2.304.zip"
+DUPLICATI_URL="https://updates.duplicati.com/beta/duplicati_2.0.7.1-1_all.deb"
 NVM_URL="https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh"
 OHMYZSL_URL="https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh"
 DOWNLOADS_DIRECTORY="$HOME/Downloads/programas"
+ORIGINAL_DIRECTORY=$(pwd)
 
-## Add repositories for Ondriver and Albert##
+## Add repositories for Ondriver, Albert##
 sudo tee /etc/apt/sources.list.d/home:jstaf.list <<< 'deb http://download.opensuse.org/repositories/home:/jstaf/xUbuntu_20.04/ /'
 # sudo tee /etc/apt/sources.list.d/home:manuelschneid3r.list <<< 'deb http://download.opensuse.org/repositories/home:/manuelschneid3r/xUbuntu_22.04/ /'
+
+
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
+echo "deb https://download.mono-project.com/repo/ubuntu stable-focal main" | sudo tee /etc/apt/sources.list.d/mono-official-stable.list
 
 curl -fsSL https://download.opensuse.org/repositories/home:jstaf/xUbuntu_22.04/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/home_jstaf.gpg > /dev/null
 # curl -fsSL https://download.opensuse.org/repositories/home:manuelschneid3r/xUbuntu_22.04/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/home_manuelschneid3r.gpg > /dev/null
@@ -67,6 +73,15 @@ APT_PACKAGES_TO_INSTALL=(
   onedriver
   snap
   snapd
+  apt-transport-https
+  nano
+  git-core
+  software-properties-common
+  dirmngr
+  mono-devel
+  gtk-sharp2
+  libappindicator0.1-cil
+  libmono-2.0-1
 )
 
 CLASSIC_SNAPS_TO_INSTALL=(
@@ -91,10 +106,13 @@ FLATPAKS_TO_INSTALL=(
   org.kde.kdenlive
   com.github.qarmin.czkawka
   it.mijorus.smile
+  net.nokyan.Resources
 )
 
-## Download JetBrains fonts ##
-#mkdir "$DOWNLOADS_DIRECTORY"
+## Download JetBrains fonts and Duplicati ##
+mkdir "$DOWNLOADS_DIRECTORY"
+wget -c "$DUPLICATI_URL"       -P "$DOWNLOADS_DIRECTORY"
+
 #wget -c "$JETBRAINS_MONO_URL"       -P "$DOWNLOADS_DIRECTORY"
 
 #unzip "$DOWNLOADS_DIRECTORY/JetBrainsMono-2.304.zip" -d "$DOWNLOADS_DIRECTORY/JetBrainsMono-2.304"
@@ -136,6 +154,8 @@ for program_name in ${APT_PACKAGES_TO_INSTALL[@]}; do
     echo "[INSTALLED] - $program_name"
 done
 
+sudo apt install ./$DOWNLOADS_DIRECTORY/duplicati*.deb
+
 ## Install Oh My Zsh ##
 sh -c "$(curl -fsSL "$OHMYZSL_URL")"
 
@@ -169,6 +189,14 @@ for flatpak_name in ${FLATPAKS_TO_INSTALL[@]}; do
     echo "[INSTALLED] - $flatpak_name"
   fi
 done
+
+## Duplicati configuration ##
+sudo tee /etc/default/duplicati <<< 'DAEMON_OPTS="--webservice-interface=any --webservice-port=8200 --portable-mode"'
+sudo cp $ORIGINAL_DIRECTORY/duplicati/duplicati.service /etc/systemd/system/duplicati.service
+sudo systemctl enable duplicati.service
+sudo systemctl daemon-reload
+sudo systemctl start duplicati.service
+
 
 ## Install NVM packages ##
 nvm install 14
