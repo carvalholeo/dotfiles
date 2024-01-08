@@ -199,18 +199,20 @@ sudo systemctl start duplicati.service
 
 
 ## Install NVM packages ##
-nvm install 14
 nvm install 16
 nvm install 18
-
-nvm use 14
-npm install -g yarn eslint typescript
+nvm install 20
 
 nvm use 16
 npm install -g yarn eslint typescript
 
 nvm use 18
 npm install -g yarn eslint typescript
+
+nvm use 20
+npm install -g yarn eslint typescript
+
+nvm use default 20
 
 ## Other configurations ##
 sudo usermod -aG docker $USER
