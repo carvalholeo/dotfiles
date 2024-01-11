@@ -44,6 +44,8 @@ Please note that the install script is intended to be run on Debian or Ubuntu, a
 
 ## Duplicati Configuration
 
+Duplicati is a service to make backups from your drive to another place.
+
 The duplicati/ directory contains encrypted configuration files for Duplicati. To use these, you'll need to import them into Duplicati and provide the decryption password.
 
 ## License
