@@ -204,13 +204,13 @@ nvm install 18
 nvm install 20
 
 nvm use 16
-npm install -g yarn eslint typescript
+npm install -g yarn eslint typescript snyk
 
 nvm use 18
-npm install -g yarn eslint typescript
+npm install -g yarn eslint typescript snyk
 
 nvm use 20
-npm install -g yarn eslint typescript
+npm install -g yarn eslint typescript snyk
 
 nvm use default 20
 
