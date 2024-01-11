@@ -15,87 +15,84 @@ DOWNLOADS_DIRECTORY="$HOME/Downloads/programas"
 ORIGINAL_DIRECTORY=$(pwd)
 
 APT_PACKAGES_TO_INSTALL=(
-  flameshot
-  steam-installer
-  steam-devices
-  steam:i386
-  libgnutls30:i386
-  #libldap-2.4-2:i386
-  libgpg-error0:i386
-  libxml2:i386
-  libasound2-plugins:i386
-  libsdl2-2.0-0:i386
-  libfreetype6:i386
-  libdbus-1-3:i386
-  libsqlite3-0:i386
-  guvcview
-  virtualbox
-  winff
+  #albert
+  apt-transport-https
+  apt-transport-https
+  #bleachbit
+  ca-certificates
+  containerd.io
+  curl
+  dirmngr
+  docker-buildx-plugin
   docker-ce
   docker-ce-cli
-  containerd.io
-  docker-buildx-plugin
-  docker-compose-plugin
   docker-compose
-  git
-  libssl-dev
-  software-properties-common
-  apt-transport-https
-  wget
-  curl
-  microsoft-edge-stable
-  ca-certificates
-  gnupg
-  lsb-release
-  ubuntu-restricted-extras
-  zip
-  unzip
-  zsh
+  docker-compose-plugin
+  "$HOME/$DOWNLOADS_DIRECTORY/duplicati.deb"
+  flameshot
   folder-color
+  git
+  git-core
   gnome-sushi
-  #albert
   gnome-tweaks
-  #plank
-  timeshift
-  tlp
-  #bleachbit
+  gnupg
+  gtk-sharp2
+  guvcview
+  libappindicator0.1-cil
+  libasound2-plugins:i386
+  libdbus-1-3:i386
+  libfreetype6:i386
+  libgnutls30:i386
+  libgpg-error0:i386
+  #libldap-2.4-2:i386
+  libmono-2.0-1
+  libsdl2-2.0-0:i386
+  libsqlite3-0:i386
+  libssl-dev
+  libxml2:i386
+  lsb-release
+  microsoft-edge-stable
+  mono-devel
+  nano
   onedriver
+  #plank
   snap
   snapd
-  apt-transport-https
-  nano
-  git-core
   software-properties-common
-  dirmngr
-  mono-devel
-  gtk-sharp2
-  libappindicator0.1-cil
-  libmono-2.0-1
-  "$HOME/$DOWNLOADS_DIRECTORY/duplicati.deb"
+  software-properties-common
+  steam-devices
+  steam-installer
+  steam:i386
+  timeshift
+  tlp
+  ubuntu-restricted-extras
+  unzip
+  virtualbox
+  wget
+  winff
+  zip
+  zsh
 )
 
 CLASSIC_SNAPS_TO_INSTALL=(
   code
-  insomnia
 )
 
 SNAPS_TO_INSTALL=(
   discord
-  bw
   bitwarden
+  bw
+  insomnia
   telegram-desktop
-  icloud-for-linux
-  icloud-notes-linux-client
   upscayl
 )
 
 FLATPAKS_TO_INSTALL=(
-  com.obsproject.Studio
+  com.github.qarmin.czkawka
   io.dbeaver.DBeaverCommunity
   org.gimp.GIMP
   org.kde.kdenlive
-  com.github.qarmin.czkawka
-  it.mijorus.smile
+  com.obsproject.Studio
   net.nokyan.Resources
 )
 
