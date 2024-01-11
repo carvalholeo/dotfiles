@@ -126,10 +126,12 @@ function add_repositories() {
   ## Ondriver ##
   echo "Adding repositories..."
   echo "Adding Ondriver repository..."
-  sudo tee /etc/apt/sources.list.d/home:jstaf.list <<< 'deb http://download.opensuse.org/repositories/home:/jstaf/xUbuntu_20.04/ /'
-  if [ $? -ne 0 ]; then
-    echo "Failed to add Ondriver repository"
-    exit 1
+  if ! grep -q 'deb http://download.opensuse.org/repositories/home:/jstaf/xUbuntu_20.04/ /' /etc/apt/sources.list.d/home:jstaf.list; then
+    sudo tee /etc/apt/sources.list.d/home:jstaf.list <<< 'deb http://download.opensuse.org/repositories/home:/jstaf/xUbuntu_20.04/ /'
+    if [ $? -ne 0 ]; then
+      echo "Failed to add Ondriver repository"
+      exit 1
+    fi
   fi
 
   curl -fsSL https://download.opensuse.org/repositories/home:jstaf/xUbuntu_20.04/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/home_jstaf.gpg > /dev/null
@@ -172,10 +174,12 @@ function add_repositories() {
 
   ## Docker ##
   echo "Adding Docker repository..."
-  sudo mkdir -m 0755 -p /etc/apt/keyrings
-  if [ $? -ne 0 ]; then
-    echo "Failed to create Docker keyrings directory"
-    exit 1
+  if [ ! -d "/etc/apt/keyrings" ]; then
+    sudo mkdir -m 0755 -p /etc/apt/keyrings
+    if [ $? -ne 0 ]; then
+      echo "Failed to create Docker keyrings directory"
+      exit 1
+    fi
   fi
 
   curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
@@ -204,10 +208,12 @@ function add_repositories() {
 function make_downloads() {
   ## Download JetBrains fonts and Duplicati ##
   echo "Downloading Duplicati..."
-  mkdir -p "$DOWNLOADS_DIRECTORY"
-  if [ $? -ne 0 ]; then
-    echo "Failed to create downloads directory"
-    exit 1
+  if [ ! -d "$DOWNLOADS_DIRECTORY" ]; then
+    mkdir -p "$DOWNLOADS_DIRECTORY"
+    if [ $? -ne 0 ]; then
+      echo "Failed to create downloads directory"
+      exit 1
+    fi
   fi
 
   curl -fsSL "$DUPLICATI_URL" -o "$DOWNLOADS_DIRECTORY/duplicati.deb"
@@ -242,12 +248,15 @@ function install_apt_packages() {
 
   ## Install programs from APT ##
   for program_name in ${APT_PACKAGES_TO_INSTALL[@]}; do
+    if ! dpkg -l | grep -q nome_do_pacote; then
       sudo apt install "$program_name" -y -q
       if [ $? -ne 0 ]; then
         echo "Failed to install $program_name"
         exit 1
+      else
+        echo "[INSTALLED] - $program_name"
       fi
-      echo "[INSTALLED] - $program_name"
+    fi
   done
 
   echo "APT packages installed!"
@@ -393,10 +402,12 @@ function install_flatpaks() {
 function initial_duplicati_configuration() {
   echo "Preparing Duplicati configuration..."
   ## Duplicati configuration ##
-  sudo tee /etc/default/duplicati <<< 'DAEMON_OPTS="--webservice-interface=any --webservice-port=8200 --portable-mode"'
-  if [ $? -ne 0 ]; then
-    echo "Failed to create Duplicati configuration file"
-    exit 1
+  if ! grep -q 'DAEMON_OPTS="--webservice-interface=any --webservice-port=8200 --portable-mode"' /etc/default/duplicati; then
+    sudo tee /etc/default/duplicati <<< 'DAEMON_OPTS="--webservice-interface=any --webservice-port=8200 --portable-mode"'
+    if [ $? -ne 0 ]; then
+      echo "Failed to create Duplicati configuration file"
+      exit 1
+    fi
   fi
 
   sudo cp "$ORIGINAL_DIRECTORY/duplicati/duplicati.service" /etc/systemd/system/duplicati.service
