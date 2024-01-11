@@ -445,6 +445,11 @@ function other_configurations() {
   ln "$ORIGINAL_DIRECTORY/.gitconfig" "$HOME/.gitconfig"
   source "$HOME/.zshrc"
 
+  read -p "Type BitWarden URL Server: " BITWARDEN_URL
+
+  bw config server "$BITWARDEN_URL"
+  bw config server
+
   echo "Other configurations done: ZSH as default shell, dotfiles linked and user added to docker group!"
 }
 
