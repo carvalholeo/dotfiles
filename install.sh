@@ -399,7 +399,7 @@ function initial_duplicati_configuration() {
     exit 1
   fi
 
-  sudo cp $ORIGINAL_DIRECTORY/duplicati/duplicati.service /etc/systemd/system/duplicati.service
+  sudo cp "$ORIGINAL_DIRECTORY/duplicati/duplicati.service" /etc/systemd/system/duplicati.service
   if [ $? -ne 0 ]; then
     echo "Failed to create Duplicati service file"
     exit 1
@@ -441,8 +441,8 @@ function other_configurations() {
   fi
   rm -f "$HOME/.zshrc"
   rm -f "$HOME/.gitconfig"
-  ln "$HOME/dev/dotfiles/.zshrc" "$HOME/.zshrc"
-  ln "$HOME/dev/dotfiles/.gitconfig" "$HOME/.gitconfig"
+  ln "$ORIGINAL_DIRECTORY/.zshrc" "$HOME/.zshrc"
+  ln "$ORIGINAL_DIRECTORY/.gitconfig" "$HOME/.gitconfig"
   source "$HOME/.zshrc"
 
   echo "Other configurations done: ZSH as default shell, dotfiles linked and user added to docker group!"
