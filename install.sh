@@ -515,3 +515,4 @@ main
 
 ## Finising ##
 echo "Installation finished! Verify if everything is ok and reboot your computer."
+read -p "Press Enter to finish this script..."
