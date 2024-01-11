@@ -110,8 +110,8 @@ FLATPAKS_TO_INSTALL=(
 )
 
 ## Download JetBrains fonts and Duplicati ##
-mkdir "$DOWNLOADS_DIRECTORY"
-wget -c "$DUPLICATI_URL"       -P "$DOWNLOADS_DIRECTORY"
+mkdir -p "$DOWNLOADS_DIRECTORY"
+wget -qc "$DUPLICATI_URL"       -P "$DOWNLOADS_DIRECTORY"
 
 #wget -c "$JETBRAINS_MONO_URL"       -P "$DOWNLOADS_DIRECTORY"
 
@@ -154,7 +154,7 @@ for program_name in ${APT_PACKAGES_TO_INSTALL[@]}; do
     echo "[INSTALLED] - $program_name"
 done
 
-sudo apt install ./$DOWNLOADS_DIRECTORY/duplicati*.deb
+sudo apt install $HOME/$DOWNLOADS_DIRECTORY/duplicati*.deb
 
 ## Install Oh My Zsh ##
 sh -c "$(curl -fsSL "$OHMYZSL_URL")"
@@ -219,11 +219,11 @@ sudo usermod -aG docker $USER
 git config --global user.name "Léo Carvalho"
 git config --global user.email "carvalho.csleo@gmail.com"
 chsh -s /bin/zsh
-rm -f /home/leonardo/.zshrc
-rm -f /home/leonardo/.gitconfig
-ln /home/leonardo/dev/dotfiles/.zshrc /home/leonardo/.zshrc
-ln /home/leonardo/dev/dotfiles/.gitconfig /home/leonardo/.gitconfig
-source /home/leonardo/.zshrc
+rm -f $HOME/.zshrc
+rm -f $HOME/.gitconfig
+ln $HOME/dev/dotfiles/.zshrc $HOME/.zshrc
+ln $HOME/dev/dotfiles/.gitconfig $HOME/.gitconfig
+source $HOME/.zshrc
 
 ## Update system and clean ##
 sudo apt update -q && sudo apt upgrade -y -q
