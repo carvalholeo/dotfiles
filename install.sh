@@ -448,7 +448,11 @@ function other_configurations() {
   read -p "Type BitWarden URL Server: " BITWARDEN_URL
 
   bw config server "$BITWARDEN_URL"
+
+  echo "BitWarden URL Server configured!"
   bw config server
+
+  read -p "Press Enter to continue..."
 
   echo "Other configurations done: ZSH as default shell, dotfiles linked and user added to docker group!"
 }
