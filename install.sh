@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 set -euo pipefail
-sudo -v
 
 ## Create variables ##
 EDGE_KEY="https://packages.microsoft.com/keys/microsoft.asc"
