@@ -67,6 +67,7 @@ APT_PACKAGES_TO_INSTALL=(
   ubuntu-restricted-extras
   unzip
   virtualbox
+  vlc
   wget
   winff
   zip
@@ -92,8 +93,10 @@ FLATPAKS_TO_INSTALL=(
   com.github.qarmin.czkawka
   io.dbeaver.DBeaverCommunity
   org.gimp.GIMP
+  com.heroicgameslauncher.hgl
   org.kde.kdenlive
   com.obsproject.Studio
+  org.onlyoffice.desktopeditors
   net.nokyan.Resources
 )
 
