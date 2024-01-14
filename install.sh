@@ -82,7 +82,9 @@ SNAPS_TO_INSTALL=(
   bitwarden
   bw
   insomnia
+  ngrok
   telegram-desktop
+  thunderbird
   upscayl
 )
 
